@@ -1,0 +1,23 @@
+.container{
+    width: 400px;
+    height: 100px;
+    font-family: "Candara";
+    font-size: 20px;
+    font-weight: bold;
+    color: #037dff;
+    margin-bottom: 0px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    /*margin-top: 30px;*/
+    width: 10px;
+}
+.testo{
+    margin-top: 30px;
+    font-size: 15px;
+    color: #0072b3;
+}
