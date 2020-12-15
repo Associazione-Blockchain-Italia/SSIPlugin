@@ -1,10 +1,7 @@
 <?php 
     define('WP_USE_THEMES', false);
-    
-    $uri = $_SERVER["SCRIPT_FILENAME"];
-    $wpload = str_replace( "wp-content/plugins/SSIPlugin/pluginform.php", "",$uri)."wp-load.php";
-    //require($_SERVER['DOCUMENT_ROOT'] . '/wordpress/wp-load.php');
-    require ($wpload);
+
+    require_once( '../../../wp-load.php' );    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
