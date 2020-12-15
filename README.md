@@ -15,6 +15,8 @@ The advantages of using this plugin are:
 
 ## Prerequisites
 
+WordPress 5 and PHP 7
+
 ## How it works
 
 The plugin has been implemented using the Trinsic REST API (https://trinsic.id) and requires registration with the API in order to provide the Access token of the Organization whith issues the credentials and the DefinitionID of the credential. 
