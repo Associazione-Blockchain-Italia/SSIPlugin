@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: SSI Plugin
- * Plugin URI: http://www.araneum.it/
+ * Plugin URI: https://github.com/Associazione-Blockchain-Italia/SSIPlugin
  * Description:
- * Author: Araneum
+ * Author: Araneum Group srl
  * Version: 1.0.0
- * Author URI: http://www.araneum.it/
+ * Author URI: https://www.araneum.it/
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -42,7 +42,7 @@ function verify( $user_login, $user ) {
 }
 
 function wpdocs_register_my_custom_menu_page() {
-	add_menu_page( 'SSI Admin', 'SSI Settings', 'manage_options', 'custompage', 'display', 'dashicons-admin-network', 90 );
+	add_menu_page( 'SSI Admin', 'SSI Settings', 'manage_options', 'ssiplugin', 'display', 'dashicons-admin-network', 90 );
 }
 
 // Funzione che mostra la pagina di amministrazione
@@ -141,3 +141,11 @@ add_action( 'admin_post_process_form', 'submit_api_key' );
 add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
 add_action( 'wp_login', 'verify', 10, 2 );
 add_action( 'login_footer', 'redirectPluginForm' );
+
+add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'salcode_add_plugin_page_settings_link');
+function salcode_add_plugin_page_settings_link( $links ) {
+	$links[] = '<a href="' .
+		admin_url( 'options-general.php?page=ssiplugin' ) .
+		'">' . __('Settings') . '</a>';
+	return $links;
+}

@@ -31,7 +31,7 @@
         <button onclick="verifyCredential();" type="button"
                 class="btn btn-outline-primary btn-block">Autenticazione
         </button>
-        <img class="qrcode" src="" alt="">
+        <img width="370" height="370" class="qrcode" src="" alt="" style="display: none">
         <div class="testo center">
         </div>
     </div>
