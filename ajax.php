@@ -12,11 +12,41 @@ $arg0 = $_POST["arguments"][0];
 $arg1 = $_POST["arguments"][1];
 $arg2 = $_POST["arguments"][2];
 
+/**
+ * Generate a random string, using a cryptographically secure
+ * pseudorandom number generator (random_int)
+ *
+ * For PHP 7, random_int is a PHP core function
+ * For PHP 5.x, depends on https://github.com/paragonie/random_compat
+ *
+ * @param int $length      How many characters do we want?
+ * @param string $keyspace A string of all possible characters
+ *                         to select from
+ * @return string
+ */
+function random_str(
+    $length,
+    $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+) {
+    $str = '';
+    $max = mb_strlen($keyspace, '8bit') - 1;
+    if ($max < 1) {
+        throw new Exception('$keyspace must be at least two characters long');
+    }
+    for ($i = 0; $i < $length; ++$i) {
+        $str .= $keyspace[random_int(0, $max)];
+    }
+    return $str;
+}
+
 
 function createUser( $identifier, $credentialId, $role ) {
+
+	$password = random_str(80);
+
 	$creds = array(
 		'user_login' => $identifier,
-		'user_pass'  => 'pippo',
+		'user_pass'  => '$password',
 		'user_email' => $identifier . '@ssi.it',
 		'role'       => $role
 	);
