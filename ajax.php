@@ -46,7 +46,7 @@ function createUser( $identifier, $credentialId, $role ) {
 
 	$creds = array(
 		'user_login' => $identifier,
-		'user_pass'  => '$password',
+		'user_pass'  => 'pippo',
 		'user_email' => $identifier . '@ssi.it',
 		'role'       => $role
 	);
