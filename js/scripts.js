@@ -26,7 +26,7 @@ function createConnection() {
     $.ajax({
         url: urlAjax,
         type: 'POST',
-        data: {functionname: 'createConnection', arguments: [],},
+        data: { functionname: 'createConnection', arguments: [], },
         success: function (result) {
             try {
                 const jsonResult = JSON.parse(result);
@@ -35,7 +35,7 @@ function createConnection() {
                 console.log('Invitation URL :' + invitationUrl);
                 $(".qrcode").attr("src", "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + invitationUrl);
                 $(".qrcode").show();
-                jsonObj = Object.assign({connectionId: connectionId}, jsonObj);
+                jsonObj = Object.assign({ connectionId: connectionId }, jsonObj);
                 pollingReg(identifier, connectionId, isSubscriber, jsonObj);
             } catch (e) {
                 console.log(e);
@@ -52,7 +52,7 @@ function pollingReg(identifier, connectionId, isSubscriber, jsonObj) {
         $.ajax({
             url: urlAjax,
             type: 'POST',
-            data: {functionname: 'getConnection', arguments: [connectionId],},
+            data: { functionname: 'getConnection', arguments: [connectionId], },
             success: function (result) {
                 const jsonResult = JSON.parse(result);
                 state = jsonResult['state'];
@@ -63,7 +63,7 @@ function pollingReg(identifier, connectionId, isSubscriber, jsonObj) {
                 if (state === "Connected") {
                     if (isSubscriber)
                         offerCredential(identifier, jsonObj);
-                     createUser(identifier, jsonObj,);
+                    createUser(identifier, jsonObj,);
                     clearInterval(refreshId);
                 }
             }
@@ -77,22 +77,22 @@ function offerCredential(identifier, jsonObj) {
     $.ajax({
         url: urlAjax,
         type: 'POST',
-        data: {functionname: 'offerCredential', arguments: [identifier, jsonObj],},
+        data: { functionname: 'offerCredential', arguments: [identifier, jsonObj], },
         success: function (result) {
             const jsonResult = JSON.parse(result);
             credentialId = jsonResult['credentialId'];
         },
         complete: function () {
-            jsonObj = Object.assign({credentialId: credentialId}, jsonObj);
+            jsonObj = Object.assign({ credentialId: credentialId }, jsonObj);
         },
     });
 }
 
-function createUser(identifier, jsonObj, id=0) {
+function createUser(identifier, jsonObj, id = 0) {
     $.ajax({
         url: urlAjax,
         type: 'POST',
-        data: {functionname: 'createUser', arguments: [identifier, jsonObj, id],},
+        data: { functionname: 'createUser', arguments: [identifier, jsonObj, id], },
         complete: function (result) {
             console.log(result);
         },
@@ -104,7 +104,7 @@ function authenticateUser() {
     $.ajax({
         url: urlAjax,
         type: 'POST',
-        data: {functionname: 'verifyCredential', arguments: [],},
+        data: { functionname: 'verifyCredential', arguments: [], },
         success: function (result) {
             try {
                 let jsonResult = JSON.parse(result);
@@ -129,7 +129,7 @@ function pollingAuth(verificationId) {
         $.ajax({
             url: urlAjax,
             type: 'POST',
-            data: {functionname: 'getVerification', arguments: [verificationId],},
+            data: { functionname: 'getVerification', arguments: [verificationId], },
             success: function (result) {
                 jsonResult = JSON.parse(result);
                 state = jsonResult['state'];
@@ -143,7 +143,7 @@ function pollingAuth(verificationId) {
             $.ajax({
                 url: urlAjax,
                 type: 'POST',
-                data: {functionname: 'authenticateUser', arguments: [identifier],},
+                data: { functionname: 'authenticateUser', arguments: [identifier], },
                 success: function (result) {
                     console.log(result);
                     $(".qrcode").hide();
