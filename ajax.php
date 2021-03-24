@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ACCESS_TOKEN', get_option('api_key'));
+define('ACCESS_TOKEN', get_option('wordpressi_trinsic_api_key'));
 
 $arg0 = $_POST["arguments"][0];
 $arg1 = $_POST["arguments"][1];
@@ -36,7 +36,7 @@ function createConnection()
     }
     curl_close($ch);
 
-    if (!empty(ACCESS_TOKEN) || !empty($definitionId)) {
+    if (!empty(ACCESS_TOKEN) || !empty($wordpressi_trinsic_definition_id)) {
 
         echo $result;
     } else {
@@ -69,7 +69,7 @@ function getConnection($connectionId)
     }
     curl_close($ch);
 
-    if (!empty(ACCESS_TOKEN) || !empty($definitionId)) {
+    if (!empty(ACCESS_TOKEN) || !empty($wordpressi_trinsic_definition_id)) {
         echo $result;
     } else {
         echo "Api key inesistente";
@@ -81,13 +81,13 @@ function offerCredential($identifier, $jsonObj)
     endsWith($identifier, 'ssi2') ? $ide = substr($identifier, 0, -1) : $ide = $identifier;
     $role = $jsonObj['role'];
     $connectionId = $jsonObj['connectionId'];
-    $definitionId = get_option('definitionId');
+    $wordpressi_trinsic_definition_id = get_option('wordpressi_trinsic_definition_id');
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://api.trinsic.id/credentials/v1/credentials');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"credentialValues\":{\"Identifier\":\"$ide\",\"Role\":\"$role\"},\"definitionId\":\"$definitionId\",\"connectionId\":\"$connectionId\",\"automaticIssuance\":true}");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"credentialValues\":{\"Identifier\":\"$ide\",\"Role\":\"$role\"},\"wordpressi_trinsic_definition_id\":\"$wordpressi_trinsic_definition_id\",\"connectionId\":\"$connectionId\",\"automaticIssuance\":true}");
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
@@ -104,7 +104,7 @@ function offerCredential($identifier, $jsonObj)
     curl_close($ch);
 
 
-    if (!empty(ACCESS_TOKEN) || !empty($definitionId)) {
+    if (!empty(ACCESS_TOKEN) || !empty($wordpressi_trinsic_definition_id)) {
         echo $result;
     } else {
         echo "Api key inesistente";

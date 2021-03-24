@@ -19,7 +19,7 @@ WordPress 5 and PHP 7
 
 ## How it works
 
-The plugin has been implemented using the Trinsic REST API (https://trinsic.id) and requires registration with the API in order to provide the Access token of the Organization whith issues the credentials and the DefinitionID of the credential. 
+The plugin has been implemented using the Trinsic REST API (https://trinsic.id) and requires registration with the API in order to provide the Access token of the Organization whith issues the credentials and the wordpressi_trinsic_definition_id of the credential. 
 
 For our test implementation we have used Credential ID Xw9jQyfGdYzCbiRvXpWYrt:3:CL:153208:default with Schema ID Xw9jQyfGdYzCbiRvXpWYrt:2:Autenticazione Standard:1.0 both of which can be found in the Sovrein Staging blockchain (https://indyscan.io/tx/SOVRIN_STAGINGNET/domain/153212).
 

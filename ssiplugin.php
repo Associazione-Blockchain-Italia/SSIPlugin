@@ -95,58 +95,58 @@ function display()
 
         //Tabella riassuntiva delle API che trattiamo che può tornare utile per il deploy. Togliere i commenti per usarla.
 
-        // $result = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='trinsic_api_key' OR
-        // option_name ='trinsic_definition_id' OR
-        // option_name ='evernym_api_key' OR
-        // option_name ='evernym_domain_did' OR
-        // option_name ='evernym_definition_id' OR
-        // option_name ='evernym_webhook'
+        $result = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_api_key' OR
+        option_name ='wordpressi_trinsic_definition_id' OR
+        option_name ='wordpressi_evernym_api_key' OR
+        option_name ='wordpressi_evernym_domain_did' OR
+        option_name ='wordpressi_evernym_definition_id' OR
+        option_name ='wordpressi_evernym_webhook'
         
-        // ");
+        ");
 
-        // echo "<br><br>";
-        // echo "<table border='1'>
-        //      <tr>
-        //      <th>Chiave</th>
-        //     <th>Valore</th>
-        //      </tr>";
+        echo "<br><br>";
+        echo "<table border='1'>
+              <tr>
+             <th>Chiave</th>
+            <th>Valore</th>
+             </tr>";
 
-        //  while ($row = mysqli_fetch_array($result)) {
-        //     echo "<tr>";
-        //     echo "<td>" . $row['option_name'] . "</td>";
-        //      echo "<td>" . $row['option_value'] . "</td>";
-        //     echo "</tr>";
-        // }
-        //  echo "</table>";
+         while ($row = mysqli_fetch_array($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['option_name'] . "</td>";
+             echo "<td>" . $row['option_value'] . "</td>";
+            echo "</tr>";
+        }
+          echo "</table>";
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='trinsic_api_key'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_api_key'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_trinsic_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_trinsic_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='trinsic_definition_id'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_definition_id'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_trinsic_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_trinsic_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='evernym_api_key'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_api_key'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_evernym_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_evernym_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='evernym_domain_did'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_domain_did'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_evernym_domain_did = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_evernym_domain_did = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='evernym_definition_id'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_definition_id'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_evernym_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_evernym_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='evernym_webhook'");
+        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_webhook'");
         while ($row = mysqli_fetch_array($prov)) {
-            $current_evernym_webhook = $row['option_value']; // Mi salvo il valore corrente in una variabile
+            $current_wordpressi_evernym_webhook = $row['option_value']; // Mi salvo il valore corrente in una variabile
         }
 
 
@@ -177,7 +177,7 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="trinsic_api_key" placeholder="<?php echo $current_trinsic_api_key; ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_api_key" placeholder="<?php echo $current_wordpressi_trinsic_api_key; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
             </form>
@@ -185,7 +185,7 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="trinsic_definition_id" placeholder="<?php echo $current_trinsic_definition_id; ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_definition_id" placeholder="<?php echo $current_wordpressi_trinsic_definition_id; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
             </form>
@@ -310,36 +310,47 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="evernym_api_key" placeholder="<?php echo $current_evernym_api_key; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_api_key" placeholder="<?php echo $current_wordpressi_evernym_api_key; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Domain DID</h3>
-                <input type="text" size="44" name="evernym_domain_did" placeholder="<?php echo $current_evernym_domain_did; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_domain_did" placeholder="<?php echo $current_wordpressi_evernym_domain_did; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Domain DID" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="evernym_definition_id" placeholder="<?php echo $current_evernym_definition_id; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_definition_id" placeholder="<?php echo $current_wordpressi_evernym_definition_id; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Local Test Webhook</h3>
-                <input type="text" size="44" name="evernym_webhook" placeholder="<?php echo $current_evernym_webhook; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_webhook" placeholder="<?php echo $current_wordpressi_evernym_webhook; ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Local Test Webhook" />
+            </form>
+
+
+            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
+
+                <h3>Chiamiamo Evernym</h3>
+                <input type="text" size="44" name="evernym_test" placeholder="<?php echo $current_wordpressi_evernym_webhook; ?>">
+                <input type="hidden" name="action" value="process_form">
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="prova a chiamare evernym" />
+            
             </form>
 
             <h3>Test the library</h3>
 
             <div>
                 <button onclick="testSwitchEvernym()" class="update-button button-primary">Begin test</button>
+
                 <span id="evernym-test-ok" class="test-result-ok">
                     OK
                 </span>
@@ -495,35 +506,39 @@ function display()
 
     <!-- Fino a qua -->
 
-<?php
+
+
+
+    <?php
+
 }
 
 // Registrazione in Database di variabili per Trinsic
 
-function submit_trinsic_api_key()
+function submit_wordpressi_trinsic_api_key()
 {
-    if (isset($_POST['trinsic_api_key'])) {
-        $trinsic_api_key = sanitize_text_field($_POST['trinsic_api_key']);
-        $trinsic_api_exists = get_option('trinsic_api_key');
-        if (!empty($trinsic_api_key) && !empty($trinsic_api_exists)) {
-            update_option('trinsic_api_key', $trinsic_api_key);
+    if (isset($_POST['wordpressi_trinsic_api_key'])) {
+        $wordpressi_trinsic_api_key = sanitize_text_field($_POST['wordpressi_trinsic_api_key']);
+        $trinsic_api_exists = get_option('wordpressi_trinsic_api_key');
+        if (!empty($wordpressi_trinsic_api_key) && !empty($trinsic_api_exists)) {
+            update_option('wordpressi_trinsic_api_key', $wordpressi_trinsic_api_key);
         } else {
-            add_option('trinsic_api_key', $trinsic_api_key);
+            add_option('wordpressi_trinsic_api_key', $wordpressi_trinsic_api_key);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
 }
 
 
-function submit_trinsic_definition_id()
+function submit_wordpressi_trinsic_definition_id()
 {
-    if (isset($_POST['trinsic_definition_id'])) {
-        $trinsic_definition_id = sanitize_text_field($_POST['trinsic_definition_id']);
-        $trinsic_definition_id_exists = get_option('trinsic_definition_id');
-        if (!empty($trinsic_definition_id) && !empty($trinsic_definition_id_exists)) {
-            update_option('trinsic_definition_id', $trinsic_definition_id);
+    if (isset($_POST['wordpressi_trinsic_definition_id'])) {
+        $wordpressi_trinsic_definition_id = sanitize_text_field($_POST['wordpressi_trinsic_definition_id']);
+        $wordpressi_trinsic_definition_id_exists = get_option('wordpressi_trinsic_definition_id');
+        if (!empty($wordpressi_trinsic_definition_id) && !empty($wordpressi_trinsic_definition_id_exists)) {
+            update_option('wordpressi_trinsic_definition_id', $wordpressi_trinsic_definition_id);
         } else {
-            add_option('trinsic_definition_id', $trinsic_definition_id);
+            add_option('wordpressi_trinsic_definition_id', $wordpressi_trinsic_definition_id);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
@@ -533,57 +548,57 @@ function submit_trinsic_definition_id()
 // Registrazione in Database di variabili per Evernym
 
 
-function submit_evernym_api_key()
+function submit_wordpressi_evernym_api_key()
 {
-    if (isset($_POST['evernym_api_key'])) {
-        $evernym_api_key = sanitize_text_field($_POST['evernym_api_key']);
-        $evernym_api_key_exists = get_option('evernym_api_key');
-        if (!empty($evernym_api_key) && !empty($evernym_api_key_exists)) {
-            update_option('evernym_api_key', $evernym_api_key);
+    if (isset($_POST['wordpressi_evernym_api_key'])) {
+        $wordpressi_evernym_api_key = sanitize_text_field($_POST['wordpressi_evernym_api_key']);
+        $wordpressi_evernym_api_key_exists = get_option('wordpressi_evernym_api_key');
+        if (!empty($wordpressi_evernym_api_key) && !empty($wordpressi_evernym_api_key_exists)) {
+            update_option('wordpressi_evernym_api_key', $wordpressi_evernym_api_key);
         } else {
-            add_option('evernym_api_key', $evernym_api_key);
+            add_option('wordpressi_evernym_api_key', $wordpressi_evernym_api_key);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
 }
 
-function submit_evernym_domain_did()
+function submit_wordpressi_evernym_domain_did()
 {
-    if (isset($_POST['evernym_domain_did'])) {
-        $evernym_domain_did = sanitize_text_field($_POST['evernym_domain_did']);
-        $evernym_domain_did_exists = get_option('evernym_domain_did');
-        if (!empty($evernym_domain_did) && !empty($evernym_domain_did_exists)) {
-            update_option('evernym_domain_did', $evernym_domain_did);
+    if (isset($_POST['wordpressi_evernym_domain_did'])) {
+        $wordpressi_evernym_domain_did = sanitize_text_field($_POST['wordpressi_evernym_domain_did']);
+        $wordpressi_evernym_domain_did_exists = get_option('wordpressi_evernym_domain_did');
+        if (!empty($wordpressi_evernym_domain_did) && !empty($wordpressi_evernym_domain_did_exists)) {
+            update_option('wordpressi_evernym_domain_did', $wordpressi_evernym_domain_did);
         } else {
-            add_option('evernym_domain_did', $evernym_domain_did);
+            add_option('wordpressi_evernym_domain_did', $wordpressi_evernym_domain_did);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
 }
 
-function submit_evernym_definition_id()
+function submit_wordpressi_evernym_definition_id()
 {
-    if (isset($_POST['evernym_definition_id'])) {
-        $evernym_definition_id = sanitize_text_field($_POST['evernym_definition_id']);
-        $evernym_definition_id_exists = get_option('evernym_definition_id');
-        if (!empty($evernym_definition_id) && !empty($evernym_definition_id_exists)) {
-            update_option('evernym_definition_id', $evernym_definition_id);
+    if (isset($_POST['wordpressi_evernym_definition_id'])) {
+        $wordpressi_evernym_definition_id = sanitize_text_field($_POST['wordpressi_evernym_definition_id']);
+        $wordpressi_evernym_definition_id_exists = get_option('wordpressi_evernym_definition_id');
+        if (!empty($wordpressi_evernym_definition_id) && !empty($wordpressi_evernym_definition_id_exists)) {
+            update_option('wordpressi_evernym_definition_id', $wordpressi_evernym_definition_id);
         } else {
-            add_option('evernym_definition_id', $evernym_definition_id);
+            add_option('wordpressi_evernym_definition_id', $wordpressi_evernym_definition_id);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
 }
 
-function submit_evernym_webhook()
+function submit_wordpressi_evernym_webhook()
 {
-    if (isset($_POST['evernym_webhook'])) {
-        $evernym_webhook = sanitize_text_field($_POST['evernym_webhook']);
-        $evernym_webhook_exists = get_option('evernym_webhook');
-        if (!empty($evernym_webhook) && !empty($evernym_webhook_exists)) {
-            update_option('evernym_webhook', $evernym_webhook);
+    if (isset($_POST['wordpressi_evernym_webhook'])) {
+        $wordpressi_evernym_webhook = sanitize_text_field($_POST['wordpressi_evernym_webhook']);
+        $wordpressi_evernym_webhook_exists = get_option('wordpressi_evernym_webhook');
+        if (!empty($wordpressi_evernym_webhook) && !empty($wordpressi_evernym_webhook_exists)) {
+            update_option('wordpressi_evernym_webhook', $wordpressi_evernym_webhook);
         } else {
-            add_option('evernym_webhook', $evernym_webhook);
+            add_option('wordpressi_evernym_webhook', $wordpressi_evernym_webhook);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER']);
@@ -591,6 +606,46 @@ function submit_evernym_webhook()
 
 
 
+function submit_evernym_test() 
+{
+
+    $curl = curl_init();
+    
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://vas.pps.evernym.com/api/TVs7RkcH6crEbMJU8hgqWY/configs/0.6/',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS =>'{
+    "@id": "9643c27a-5adf-469e-b9a2-8461cf52b7b0",
+    "@type": "did:sov:123456789abcdefghi1234;spec/configs/0.6/UPDATE_COM_METHOD",
+    "comMethod": {
+    "id": "webhook",
+    "value": "http://e6bd39e84e93.ngrok.io/demo-wamp/wp-content/plugins/SSIPlugin-features/webhook.php",
+    "type": 2,
+    "packaging": {
+    "pkgType": "plain"
+    }
+    }
+    }',
+    CURLOPT_HTTPHEADER => array(
+    'X-API-KEY: CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv',
+    'Content-Type: application/json',
+    'Authorization: Bearer CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv'
+    ),
+    ));
+    
+    $response = curl_exec($curl);
+    
+    curl_close($curl);
+    echo $response;
+    file_put_contents(time()."-resp.txt", print_r($response,true));
+
+}
 
 
 
@@ -621,27 +676,26 @@ function getSSIPendingUser()
 }
 
 
-add_action('admin_post_nopriv_process_form', 'submit_trinsic_api_key');
-add_action('admin_post_process_form', 'submit_trinsic_api_key');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_trinsic_api_key');
+add_action('admin_post_process_form', 'submit_wordpressi_trinsic_api_key');
 
-add_action('admin_post_nopriv_process_form', 'submit_trinsic_definition_id');
-add_action('admin_post_process_form', 'submit_trinsic_definition_id');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_trinsic_definition_id');
+add_action('admin_post_process_form', 'submit_wordpressi_trinsic_definition_id');
 
-add_action('admin_post_nopriv_process_form', 'submit_evernym_api_key');
-add_action('admin_post_process_form', 'submit_evernym_api_key');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_api_key');
+add_action('admin_post_process_form', 'submit_wordpressi_evernym_api_key');
 
-add_action('admin_post_nopriv_process_form', 'submit_evernym_domain_did');
-add_action('admin_post_process_form', 'submit_evernym_domain_did');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_domain_did');
+add_action('admin_post_process_form', 'submit_wordpressi_evernym_domain_did');
 
-add_action('admin_post_nopriv_process_form', 'submit_evernym_definition_id');
-add_action('admin_post_process_form', 'submit_evernym_definition_id');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_definition_id');
+add_action('admin_post_process_form', 'submit_wordpressi_evernym_definition_id');
 
-add_action('admin_post_nopriv_process_form', 'submit_evernym_webhook');
-add_action('admin_post_process_form', 'submit_evernym_webhook');
+add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_webhook');
+add_action('admin_post_process_form', 'submit_wordpressi_evernym_webhook');
 
-
-
-
+add_action('admin_post_nopriv_process_form', 'submit_evernym_test');
+add_action('admin_post_process_form', 'submit_evernym_test');
 
 
 
