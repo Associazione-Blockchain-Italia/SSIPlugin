@@ -256,16 +256,12 @@ function display()
             </form>
 
 
-                <!-- Da sistemare la form sottostante -->
 
-            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
 
-                <h3>Chiamiamo Evernym</h3>
-                <input type="text" size="44" name="evernym_test" placeholder="<?php echo $current_wordpressi_evernym_webhook; ?>">
-                <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="prova a chiamare evernym" />
-            
-            </form>
+            <button onclick="submit_evernym_test()" class="update-button button-primary">Begin test</button>
+
+
+
 
             <h3>Test the library</h3>
 
@@ -546,7 +542,7 @@ function submit_evernym_test()
     "@type": "did:sov:123456789abcdefghi1234;spec/configs/0.6/UPDATE_COM_METHOD",
     "comMethod": {
     "id": "webhook",
-    "value": "http://e6bd39e84e93.ngrok.io/demo-wamp/wp-content/plugins/SSIPlugin-features/webhook.php",
+    "value": "http://2a89e3d17dc8.ngrok.io/demo-wamp/wp-content/plugins/SSIPlugin-features/webhook.php",
     "type": 2,
     "packaging": {
     "pkgType": "plain"
@@ -614,9 +610,6 @@ add_action('admin_post_process_form', 'submit_wordpressi_evernym_definition_id')
 
 add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_webhook');
 add_action('admin_post_process_form', 'submit_wordpressi_evernym_webhook');
-
-add_action('admin_post_nopriv_process_form', 'submit_evernym_test');
-add_action('admin_post_process_form', 'submit_evernym_test');
 
 
 
