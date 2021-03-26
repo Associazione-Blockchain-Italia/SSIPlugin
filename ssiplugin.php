@@ -79,87 +79,6 @@ function display()
             <button onclick="changeToEvernym()">Evernym</button>
         </div>
 
-
-        <!-- Effettuo la chiamata al DB e mi preparo per le varie Query  -->
-
-        <?php
-
-        // Mi preparo la connection con il Database
-
-        $con = mysqli_connect("localhost", "root", "");
-        if (!$con) {
-            die('Could not connect: ' . mysqli_error($con));
-        }
-
-        mysqli_select_db($con, "wamp-demo"); //Seleziono il DB che voglio usare
-
-        //Tabella riassuntiva delle API che trattiamo che può tornare utile per il deploy. Togliere i commenti per usarla.
-
-        $result = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_api_key' OR
-        option_name ='wordpressi_trinsic_definition_id' OR
-        option_name ='wordpressi_evernym_api_key' OR
-        option_name ='wordpressi_evernym_domain_did' OR
-        option_name ='wordpressi_evernym_definition_id' OR
-        option_name ='wordpressi_evernym_webhook'
-        
-        ");
-
-        echo "<br><br>";
-        echo "<table border='1'>
-              <tr>
-             <th>Chiave</th>
-            <th>Valore</th>
-             </tr>";
-
-         while ($row = mysqli_fetch_array($result)) {
-            echo "<tr>";
-            echo "<td>" . $row['option_name'] . "</td>";
-             echo "<td>" . $row['option_value'] . "</td>";
-            echo "</tr>";
-        }
-          echo "</table>";
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_api_key'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_trinsic_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_trinsic_definition_id'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_trinsic_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_api_key'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_evernym_api_key = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_domain_did'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_evernym_domain_did = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_definition_id'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_evernym_definition_id = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-        $prov = mysqli_query($con, "SELECT * FROM wp_options WHERE option_name ='wordpressi_evernym_webhook'");
-        while ($row = mysqli_fetch_array($prov)) {
-            $current_wordpressi_evernym_webhook = $row['option_value']; // Mi salvo il valore corrente in una variabile
-        }
-
-
-
-
-        mysqli_close($con); //Chiudo la connection con il Database
-
-
-        ?>
-
-
-
-
         <!-- Questa è la div di Trinsic che poi verrà nascosta -->
 
         <br>
@@ -177,7 +96,7 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="wordpressi_trinsic_api_key" placeholder="<?php echo $current_wordpressi_trinsic_api_key; ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_api_key" placeholder="<?php echo get_option('wordpressi_trinsic_api_key'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
             </form>
@@ -185,7 +104,7 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="wordpressi_trinsic_definition_id" placeholder="<?php echo $current_wordpressi_trinsic_definition_id; ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_definition_id" placeholder="<?php echo get_option('wordpressi_trinsic_definition_id'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
             </form>
@@ -310,32 +229,34 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="wordpressi_evernym_api_key" placeholder="<?php echo $current_wordpressi_evernym_api_key; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_api_key" placeholder="<?php echo get_option('wordpressi_evernym_api_key'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Domain DID</h3>
-                <input type="text" size="44" name="wordpressi_evernym_domain_did" placeholder="<?php echo $current_wordpressi_evernym_domain_did; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_domain_did" placeholder="<?php echo get_option('wordpressi_evernym_domain_did'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Domain DID" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="wordpressi_evernym_definition_id" placeholder="<?php echo $current_wordpressi_evernym_definition_id; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_definition_id" placeholder="<?php echo get_option('wordpressi_evernym_definition_id'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Local Test Webhook</h3>
-                <input type="text" size="44" name="wordpressi_evernym_webhook" placeholder="<?php echo $current_wordpressi_evernym_webhook; ?>">
+                <input type="text" size="44" name="wordpressi_evernym_webhook" placeholder="<?php echo get_option('wordpressi_evernym_webhook'); ?>">
                 <input type="hidden" name="action" value="process_form">
                 <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Local Test Webhook" />
             </form>
 
+
+                <!-- Da sistemare la form sottostante -->
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
 
