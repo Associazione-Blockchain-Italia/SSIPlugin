@@ -22,10 +22,10 @@ add_action('admin_enqueue_scripts', 'script_init');
 
 function redirectPluginForm()
 {
-?>
+    ?>
     <div style="text-align: center"><a href="<?php echo plugin_dir_url(__FILE__) . 'pluginform.php'; ?>">Click here
             for the SSI Authentication</a></div>
-<?php
+    <?php
 }
 
 function redirectIfSSIlogin(): string
@@ -59,11 +59,10 @@ function wpdocs_register_my_custom_menu_page()
 }
 
 
-
 function display()
 {
 
-?>
+    ?>
 
     <style>
         <?php include 'css/style.css'; ?>
@@ -96,17 +95,21 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="wordpressi_trinsic_api_key" placeholder="<?php echo get_option('wordpressi_trinsic_api_key'); ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_api_key"
+                       placeholder="<?php echo get_option('wordpressi_trinsic_api_key'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Access Token"/>
             </form>
 
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="wordpressi_trinsic_definition_id" placeholder="<?php echo get_option('wordpressi_trinsic_definition_id'); ?>">
+                <input type="text" size="44" name="wordpressi_trinsic_definition_id"
+                       placeholder="<?php echo get_option('wordpressi_trinsic_definition_id'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Definition ID"/>
             </form>
 
             <h3>Test the library</h3>
@@ -133,7 +136,7 @@ function display()
                             functionname: 'revokeCredential',
                             arguments: [identifier, id],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             console.log(result)
                             $('#' + id).hide();
                         },
@@ -149,10 +152,10 @@ function display()
                             functionname: 'recuperaJSON',
                             arguments: [identifier],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             jsonObj = JSON.parse(result);
                         },
-                        complete: function() {
+                        complete: function () {
                             $.ajax({
                                 url: '<?php echo home_url() . '/wp-content/plugins/SSIPlugin/ajax.php' ?>',
                                 type: 'POST',
@@ -160,11 +163,11 @@ function display()
                                     functionname: 'offerCredential',
                                     arguments: [identifier, jsonObj],
                                 },
-                                success: function(result) {
+                                success: function (result) {
                                     const jsonResult = JSON.parse(result);
                                     credentialId = jsonResult['credentialId'];
                                 },
-                                complete: function() {
+                                complete: function () {
                                     jsonObj = Object.assign({
                                         credentialId: credentialId
                                     }, jsonObj);
@@ -184,14 +187,15 @@ function display()
                             functionname: 'createUser',
                             arguments: [identifier, jsonObj, id],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             console.log(result);
                         },
                     });
                 }
             </script>
 
-            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">User list
+            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">User
+                list
                 <?php $users = getSSIUsers();
                 foreach ($users as $user) {
                     echo "<li id=\"" . $user->ID . "\" style='font-size: 16px; padding-top: 10px' class=\"list-group-item\">" . $user->user_login . "<button style=\"margin: 10px\" 
@@ -199,7 +203,8 @@ function display()
                 }
                 ?>
             </ul>
-            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">Pending
+            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">
+                Pending
                 user
                 <?php $users = getSSIPendingUser();
                 foreach ($users as $user) {
@@ -229,38 +234,55 @@ function display()
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Access Token</h3>
-                <input type="text" size="44" name="wordpressi_evernym_api_key" placeholder="<?php echo get_option('wordpressi_evernym_api_key'); ?>">
+                <input type="text" size="44" name="wordpressi_evernym_api_key"
+                       placeholder="<?php echo get_option('wordpressi_evernym_api_key'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Access Token" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Access Token"/>
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Domain DID</h3>
-                <input type="text" size="44" name="wordpressi_evernym_domain_did" placeholder="<?php echo get_option('wordpressi_evernym_domain_did'); ?>">
+                <input type="text" size="44" name="wordpressi_evernym_domain_did"
+                       placeholder="<?php echo get_option('wordpressi_evernym_domain_did'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Domain DID" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Domain DID"/>
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Definition ID</h3>
-                <input type="text" size="44" name="wordpressi_evernym_definition_id" placeholder="<?php echo get_option('wordpressi_evernym_definition_id'); ?>">
+                <input type="text" size="44" name="wordpressi_evernym_definition_id"
+                       placeholder="<?php echo get_option('wordpressi_evernym_definition_id'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Definition ID" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Definition ID"/>
             </form>
 
             <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                 <h3>Local Test Webhook</h3>
-                <input type="text" size="44" name="wordpressi_evernym_webhook" placeholder="<?php echo get_option('wordpressi_evernym_webhook'); ?>">
+                <input type="text" size="44" name="wordpressi_evernym_webhook"
+                       placeholder="<?php echo get_option('wordpressi_evernym_webhook'); ?>">
                 <input type="hidden" name="action" value="process_form">
-                <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Local Test Webhook" />
+                <input type="submit" name="submit" id="submit" class="update-button button button-primary"
+                       value="Update Local Test Webhook"/>
             </form>
 
 
-
-
-            <button onclick="submit_evernym_test()" class="update-button button-primary">Begin test</button>
-
-
+            <button onclick="submitEvernym()" class="update-button button-primary">Begin test</button>
+            <script> function submitEvernym(){
+                    $.ajax({
+                        url: '<?php echo home_url() . '/wp-content/plugins/SSIPlugin/ajax.php' ?>',
+                        type: 'POST',
+                        data: {
+                            functionname: 'submitEvernym',
+                            arguments: [],
+                        },
+                        success: function (result) {
+                            console.log(result)
+                        },
+                    });
+                }</script>
 
 
             <h3>Test the library</h3>
@@ -278,6 +300,7 @@ function display()
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
+
                 let jsonObj;
 
                 function revokeCredential(identifier, id) {
@@ -288,7 +311,7 @@ function display()
                             functionname: 'revokeCredential',
                             arguments: [identifier, id],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             console.log(result)
                             $('#' + id).hide();
                         },
@@ -304,10 +327,10 @@ function display()
                             functionname: 'recuperaJSON',
                             arguments: [identifier],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             jsonObj = JSON.parse(result);
                         },
-                        complete: function() {
+                        complete: function () {
                             $.ajax({
                                 url: '<?php echo home_url() . '/wp-content/plugins/SSIPlugin/ajax.php' ?>',
                                 type: 'POST',
@@ -315,11 +338,11 @@ function display()
                                     functionname: 'offerCredential',
                                     arguments: [identifier, jsonObj],
                                 },
-                                success: function(result) {
+                                success: function (result) {
                                     const jsonResult = JSON.parse(result);
                                     credentialId = jsonResult['credentialId'];
                                 },
-                                complete: function() {
+                                complete: function () {
                                     jsonObj = Object.assign({
                                         credentialId: credentialId
                                     }, jsonObj);
@@ -339,13 +362,14 @@ function display()
                             functionname: 'createUser',
                             arguments: [identifier, jsonObj, id],
                         },
-                        success: function(result) {
+                        success: function (result) {
                             console.log(result);
                         },
                     });
                 }
             </script>
-            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">User list
+            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">User
+                list
                 <?php $users = getSSIUsers();
                 foreach ($users as $user) {
                     echo "<li id=\"" . $user->ID . "\" style='font-size: 16px; padding-top: 10px' class=\"list-group-item\">" . $user->user_login . "<button style=\"margin: 10px\" 
@@ -353,7 +377,8 @@ function display()
                 }
                 ?>
             </ul>
-            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">Pending
+            <ul class="list-group" style="font-size: 19px; font-weight: 500;padding-top: 9px;padding-bottom: 4px">
+                Pending
                 user
                 <?php $users = getSSIPendingUser();
                 foreach ($users as $user) {
@@ -422,8 +447,6 @@ function display()
     </script>
 
     <!-- Fino a qua -->
-
-
 
 
     <?php
@@ -523,49 +546,6 @@ function submit_wordpressi_evernym_webhook()
 
 
 
-function submit_evernym_test() 
-{
-
-    $curl = curl_init();
-    
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://vas.pps.evernym.com/api/TVs7RkcH6crEbMJU8hgqWY/configs/0.6/',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{
-    "@id": "9643c27a-5adf-469e-b9a2-8461cf52b7b0",
-    "@type": "did:sov:123456789abcdefghi1234;spec/configs/0.6/UPDATE_COM_METHOD",
-    "comMethod": {
-    "id": "webhook",
-    "value": "http://2a89e3d17dc8.ngrok.io/demo-wamp/wp-content/plugins/SSIPlugin-features/webhook.php",
-    "type": 2,
-    "packaging": {
-    "pkgType": "plain"
-    }
-    }
-    }',
-    CURLOPT_HTTPHEADER => array(
-    'X-API-KEY: CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv',
-    'Content-Type: application/json',
-    'Authorization: Bearer CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv'
-    ),
-    ));
-    
-    $response = curl_exec($curl);
-    
-    curl_close($curl);
-    echo $response;
-    file_put_contents(time()."-resp.txt", print_r($response,true));
-
-}
-
-
-
 function getSSIUsers()
 {
     $search = 'ssi';
@@ -610,10 +590,6 @@ add_action('admin_post_process_form', 'submit_wordpressi_evernym_definition_id')
 
 add_action('admin_post_nopriv_process_form', 'submit_wordpressi_evernym_webhook');
 add_action('admin_post_process_form', 'submit_wordpressi_evernym_webhook');
-
-
-
-
 
 
 add_action('admin_menu', 'wpdocs_register_my_custom_menu_page');

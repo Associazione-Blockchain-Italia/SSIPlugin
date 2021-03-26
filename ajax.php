@@ -222,6 +222,49 @@ function revokeCredential($identifier, $id)
 
 }
 
+function submit_evernym_test()
+{
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://vas.pps.evernym.com/api/TVs7RkcH6crEbMJU8hgqWY/configs/0.6/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+    "@id": "9643c27a-5adf-469e-b9a2-8461cf52b7b0",
+    "@type": "did:sov:123456789abcdefghi1234;spec/configs/0.6/UPDATE_COM_METHOD",
+    "comMethod": {
+    "id": "webhook",
+    "value": "http://2a89e3d17dc8.ngrok.io/demo-wamp/wp-content/plugins/SSIPlugin-features/webhook.php",
+    "type": 2,
+    "packaging": {
+    "pkgType": "plain"
+    }
+    }
+    }',
+        CURLOPT_HTTPHEADER => array(
+            'X-API-KEY: CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv',
+            'Content-Type: application/json',
+            'Authorization: Bearer CNaN5SXFBamGU5jkXx9rnZ1L66zvv8Rz3fdf2duDuvKp:XrWmwiBXHPSyQMNmhUs6DWimvNnWquVu2Sh8xoFFDEFA1D93UbZCLArJyKUY7NyoVCLjWdfrQsBXQAmLpApkZXv'
+        ),
+    ));
+
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+    file_put_contents(time() . "-resp.txt", print_r($response, true));
+
+}
+
 function recuperaJSON($identifier)
 {
     $lt = get_option($identifier . 'details');
@@ -255,5 +298,8 @@ switch ($_POST["functionname"]) {
         break;
     case 'recuperaJSON':
         recuperaJSON($arg0);
+        break;
+    case 'submitEvernym':
+        submit_evernym_test();
         break;
 }
